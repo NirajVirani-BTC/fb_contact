@@ -1,0 +1,66 @@
+- if current_user
+  Signed in as 
+  %strong= current_user.name
+  = link_to "Sign out", destroy_user_session_path, method: 'DELETE'
+  .pull-right
+    %a.btn{:href => new_reviews_path}
+      %i.icon-plus 
+      Add Reviews
+  %br
+  .container-fluid
+    .span4
+      %h3 Friends
+      %ul.nav.nav-pills.nav-stacked
+        %li.active
+          %a
+            =image_tag @profile_pic
+            %strong= current_user.name
+        - if @friends_profile.present?
+          - @friends_profile.each do |friend|
+            %li
+              %a
+                =image_tag friend['picture']['data']['url']
+                = friend['name']
+                |
+                = friend['gender']
+                |
+                = friend['birthday']
+                |
+                = friend['location']['name'] if friend['location']
+        - else
+          %h3 NO Friends found      
+    .span8
+      %strong Reviews
+      %ul.nav.nav-tabs.nav-stacked
+        - if @reviews.present? 
+          - @reviews.each do |review|
+            %li
+              %a.same-line
+                =#image_tag "#{i+1}.jpg", height: "50", width:"50"
+                %p= review.place.name
+                %br
+                = review.comment
+                %div#rating
+                  = review.rating 
+        - else
+          %h3 NO Reviews found                 
+- else
+  = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
+  .p
+    = link_to "Sign in", new_user_session_path
+
+:css
+  .same-line {
+  	list-style-type: none;
+  	display: inline-block;
+  }
+
+  .same-line img
+  {
+  	float:left;
+  }
+
+  .same-line p {
+  	text-align: right; 
+  	display:inline-block;
+  }
