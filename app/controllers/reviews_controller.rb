@@ -7,10 +7,13 @@ class ReviewsController < ApplicationController
   end
 
   def create
+    params[:review][:rating] = params[:score]
+    params[:review][:facebook_id] = session[:facebook_id]
     review = Review.new(params[:review])
+
     if review.save
-    	flash.now[:notice] = "Review posted"
       redirect_to root_path
+      flash[:notice] = "Review posted"
     else
       flash.now[:alert] = "please check the details"
       render :new

@@ -10,6 +10,7 @@ gem "haml", ">= 3.1.5"
 gem "haml-rails", ">= 0.3.4"
 
 gem 'jquery-rails'
+gem "jquery-ui-rails"
 gem 'bootstrap-sass', '~> 2.3.1.2'
 
 group :assets do
@@ -18,6 +19,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem "jquery-raty-rails"
 gem "devise"
 gem 'omniauth'
 gem 'omniauth-facebook'

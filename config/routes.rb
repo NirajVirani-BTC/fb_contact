@@ -1,10 +1,13 @@
 FbContact::Application.routes.draw do
+
   # devise_for :users
 
   root :to => "home#index"
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   post '/reviews/create', to: "reviews#create", as: 'create_review'
   get '/reviews/new', to: "reviews#new", as: 'new_reviews'
+  # get "friends/index"
+  get 'friends/index/:id', to: "friends#index", as: 'friends_index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

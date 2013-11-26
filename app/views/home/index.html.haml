@@ -1,7 +1,5 @@
+#star
 - if current_user
-  Signed in as 
-  %strong= current_user.name
-  = link_to "Sign out", destroy_user_session_path, method: 'DELETE'
   .pull-right
     %a.btn{:href => new_reviews_path}
       %i.icon-plus 
@@ -9,16 +7,19 @@
   %br
   .container-fluid
     .span4
-      %h3 Friends
       %ul.nav.nav-pills.nav-stacked
         %li.active
-          %a
+          %a{:href => "#{friends_index_path(id: session[:facebook_id])}", "data-remote" => true}
             =image_tag @profile_pic
             %strong= current_user.name
+      %h3 Friends
+      %ul.nav.nav-pills.nav-stacked
         - if @friends_profile.present?
+          - user_class = 0
           - @friends_profile.each do |friend|
-            %li
-              %a{href: "friends/#{friend['id']}"}
+            - user_class = user_class + 1
+            %li{ class: "#{user_class} friends", id: friend['id'] }
+              %a{:href => "#{friends_index_path(id: friend['id'])}", "data-remote" => true}
                 =image_tag friend['picture']['data']['url']
                 = friend['name']
                 |
@@ -28,22 +29,10 @@
                 |
                 = friend['location']['name'] if friend['location']
         - else
-          %h3 NO Friends found      
+          %p None of your friends posted any review     
     .span8
       %strong Reviews
-      %ul.nav.nav-tabs.nav-stacked
-        - if @reviews.present? 
-          - @reviews.each do |review|
-            %li
-              %a.same-line{href: '#'}
-                =#image_tag "#{i+1}.jpg", height: "50", width:"50"
-                %p= review.place.name
-                %br
-                = review.comment
-                %div#rating
-                  = review.rating 
-        - else
-          %h3 NO Reviews found                 
+      .show-reviews=render partial: 'reviews', locals: { reviews: @reviews }
 - else
   = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
   .p
