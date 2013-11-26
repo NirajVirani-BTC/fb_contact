@@ -18,7 +18,7 @@
         - if @friends_profile.present?
           - @friends_profile.each do |friend|
             %li
-              %a
+              %a{href: "friends/#{friend['id']}"}
                 =image_tag friend['picture']['data']['url']
                 = friend['name']
                 |
@@ -35,7 +35,7 @@
         - if @reviews.present? 
           - @reviews.each do |review|
             %li
-              %a.same-line
+              %a.same-line{href: '#'}
                 =#image_tag "#{i+1}.jpg", height: "50", width:"50"
                 %p= review.place.name
                 %br
