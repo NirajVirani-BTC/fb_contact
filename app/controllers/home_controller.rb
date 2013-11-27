@@ -11,6 +11,7 @@ class HomeController < ApplicationController
   end	
 
   def login
+    redirect_to home_index_path if current_user.present?
   end
 
   private
