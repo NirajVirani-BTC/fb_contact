@@ -7,4 +7,4 @@
 		= f.label :comment
 		= f.text_area :comment, size: "25x10"
 	.row
-		= f.submit "Post Review", :class => 'btn'
+		= f.submit "Post Review", :class => 'btn blockUI', data: { disable_with: "Review Posting..." }

@@ -2,14 +2,14 @@
 - if current_user
   .pull-right
     %a.btn{:href => new_reviews_path}
-      %i.icon-plus 
+      %i.icon-plus
       Add Reviews
   %br
   .container-fluid
     .span4
       %ul.nav.nav-pills.nav-stacked
         %li.active
-          %a{:href => "#{friends_index_path(id: session[:facebook_id])}", "data-remote" => true}
+          %a.blockUI{:href => "#{friends_index_path(id: session[:facebook_id])}", "data-remote" => true}
             =image_tag @profile_pic
             %strong= current_user.name
       %h3 Friends
@@ -19,7 +19,7 @@
           - @friends_profile.each do |friend|
             - user_class = user_class + 1
             %li{ class: "#{user_class} friends", id: friend['id'] }
-              %a{:href => "#{friends_index_path(id: friend['id'])}", "data-remote" => true}
+              %a.blockUI{:href => "#{friends_index_path(id: friend['id'])}", "data-remote" => true}
                 =image_tag friend['picture']['data']['url']
                 = friend['name']
                 |

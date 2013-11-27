@@ -13,9 +13,9 @@ class ReviewsController < ApplicationController
 
     if review.save
       redirect_to root_path
-      flash[:notice] = "Review posted"
+      flash[:notice] = "Review Posted Successfully"
     else
-      flash.now[:alert] = "please check the details"
+      flash.now[:alert] = "Please Check The Details"
       render :new
     end
   end
