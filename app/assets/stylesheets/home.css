@@ -1,0 +1,14 @@
+.same-line {
+	list-style-type: none;
+	display: inline-block;
+}
+
+.same-line img
+{
+	float:left;
+}
+
+.same-line p {
+	text-align: right; 
+	display:inline-block;
+}

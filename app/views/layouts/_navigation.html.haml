@@ -1,7 +1,10 @@
 %header.navbar
 	%nav.navbar-inner
 		.container-fluid
-			= link_to "Facebook Friend's Reviews", root_path,class: "brand"
+			- if current_user.nil?
+				= link_to "Facebook Friend's Reviews", root_path, class: "brand"
+			-else
+				= link_to "Facebook Friend's Reviews", home_index_path, class: "brand"
 			.navbar-search.pull-right
 				- unless current_user.nil?
 					Signed in as 

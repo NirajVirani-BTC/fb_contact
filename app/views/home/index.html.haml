@@ -1,4 +1,3 @@
-#star
 - if current_user
   .pull-right
     %a.btn{:href => new_reviews_path}
@@ -31,23 +30,3 @@
     .span8
       %strong Reviews
       .show-reviews=render partial: 'reviews', locals: { reviews: @reviews }
-- else
-  = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
-  .p
-    =# link_to "Sign in", new_user_session_path
-
-:css
-  .same-line {
-  	list-style-type: none;
-  	display: inline-block;
-  }
-
-  .same-line img
-  {
-  	float:left;
-  }
-
-  .same-line p {
-  	text-align: right; 
-  	display:inline-block;
-  }

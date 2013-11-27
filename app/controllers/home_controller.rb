@@ -1,15 +1,20 @@
 class HomeController < ApplicationController
+  
   def index
-  	if current_user.present?
+    if current_user.present?
       @reviews = Review.find_all_by_facebook_id(current_user.uid)
       fetch_friends_details(current_user.uid)
-      logger.debug "current_user.uid------------------#{current_user.uid}=========="
     else
-      logger.debug "--------------------not login----------------------"
-    end  
+      redirect_to root_path
+      flash[:error] = "Please SignIn"
+    end
   end	
-  
+
+  def login
+  end
+
   private
+
   def fetch_friends_details(uid)
     @graph = Koala::Facebook::API.new(oauth_access_token)
     @profile = @graph.get_object("me")

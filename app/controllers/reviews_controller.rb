@@ -1,7 +1,6 @@
 class ReviewsController < ApplicationController
 	
-	before_filter :authenticate_user!
-  before_filter :initialize_review
+	before_filter :check_authentication, :initialize_review
 
   def new 
   end
@@ -12,7 +11,7 @@ class ReviewsController < ApplicationController
     review = Review.new(params[:review])
 
     if review.save
-      redirect_to root_path
+      redirect_to home_index_path
       flash[:notice] = "Review posted successfully"
     else
       flash.now[:alert] = "Please specify all the details"
@@ -21,6 +20,14 @@ class ReviewsController < ApplicationController
   end
 
   private
+
+  def check_authentication
+    unless current_user.present?
+      redirect_to root_path
+      flash.now[:error] = "Please SignIn"
+    end
+  end
+
   def initialize_review
     @review = Review.new
   end

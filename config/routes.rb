@@ -2,7 +2,8 @@ FbContact::Application.routes.draw do
 
   # devise_for :users
 
-  root :to => "home#index"
+  root :to => "home#login"
+  get '/home/index', to: "home#index", as: 'home_index'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   post '/reviews/create', to: "reviews#create", as: 'create_review'
   get '/reviews/new', to: "reviews#new", as: 'new_reviews'
