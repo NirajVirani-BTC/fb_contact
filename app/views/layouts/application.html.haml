@@ -6,7 +6,9 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    = render partial: "layouts/navigation"
-    #flash_div
-      = render partial: "layouts/flash"
-    = yield
+    .middle-layout
+      = render partial: "layouts/navigation"
+      #flash_div
+        = render partial: "layouts/flash"
+      = yield
+      = render partial: "layouts/bottom_navigation"

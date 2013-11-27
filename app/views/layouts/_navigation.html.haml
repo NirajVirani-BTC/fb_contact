@@ -1,11 +1,11 @@
-%header.navbar
-	%nav.navbar-inner
+.navbar.navbar-inverse
+	.navbar-inner
 		.container-fluid
 			- if current_user.nil?
 				= link_to "Facebook Friend's Reviews", root_path, class: "brand"
 			-else
 				= link_to "Facebook Friend's Reviews", home_index_path, class: "brand"
-			.navbar-search.pull-right
+			.navbar-search.pull-right.white
 				- unless current_user.nil?
 					Signed in as 
 					%strong= current_user.name

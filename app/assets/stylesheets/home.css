@@ -12,3 +12,12 @@
 	text-align: right; 
 	display:inline-block;
 }
+
+.white {
+	color: #FFFFFF;
+}
+
+.fb-btn {
+    padding-top: 200px;
+    text-align: center;
+}
