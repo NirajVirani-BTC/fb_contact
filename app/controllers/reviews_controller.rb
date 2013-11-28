@@ -22,9 +22,9 @@ class ReviewsController < ApplicationController
   private
 
   def check_authentication
-    unless current_user.present?
+    unless user_signed_in?
       redirect_to root_path
-      flash.now[:error] = "Please SignIn"
+      flash[:error] = "Please SignIn"
     end
   end
 

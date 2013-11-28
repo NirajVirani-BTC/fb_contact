@@ -1,4 +1,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  
+  before_filter :check_authentication
+
   def facebook
     # You need to implement the method below in your model (e.g. app/models/user.rb)
     @user = User.find_for_facebook_oauth(request.env["omniauth.auth"], current_user)
@@ -12,4 +15,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to root_path
     end
   end
+
+  private
+
+  def check_authentication
+    if user_signed_in?
+      redirect_to home_index_path
+      flash[:notice] = "Allready SignIn"
+    end
+  end
+  
 end
