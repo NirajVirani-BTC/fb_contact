@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   
   def index
     if current_user.present?
-      @reviews = Review.find_all_by_facebook_id(current_user.uid)
+      @reviews = Review.where(facebook_id: current_user.uid).order("created_at DESC")
       fetch_friends_details(current_user.uid)
     else
       redirect_to root_path
