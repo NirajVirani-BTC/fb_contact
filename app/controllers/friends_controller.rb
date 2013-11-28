@@ -9,7 +9,10 @@ class FriendsController < ApplicationController
   private
 
   def check_authentication
-	redirect_to root_path unless current_user.present?
+  	unless user_signed_in?
+			render :js => "window.location = '/'"
+			flash.now[:error] = "Please SignIn"
+    end
   end
 
 end
