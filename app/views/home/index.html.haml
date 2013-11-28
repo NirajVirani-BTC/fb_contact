@@ -27,6 +27,6 @@
                 = friend['location']['name'] if friend['location']
         - else
           %p None of your friends posted any review     
-    .span8
+    .span8.reivew
       %strong Reviews
       .show-reviews=render partial: 'reviews', locals: { reviews: @reviews }
