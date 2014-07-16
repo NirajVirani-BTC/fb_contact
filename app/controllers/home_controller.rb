@@ -2,7 +2,13 @@ class HomeController < ApplicationController
   def index
   	if current_user.present?
       @reviews = Review.all
-      fetch_friends_details(current_user.uid)
+      begin
+        fetch_friends_details(current_user.uid)
+      rescue Exception => exc
+        logger.error "Message for the log file #{exc.message}"
+        flash[:alert] = "User log out, because #{exc.message}"
+        destroy_user_session_path
+      end  
     else
       logger.debug "--------------------not login----------------------"
     end  
